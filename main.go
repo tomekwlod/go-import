@@ -6,7 +6,11 @@ import (
 	mailer "go-interface/mailer"
 )
 
-func sendEmail(m *mailer.Mailer, to ...mail.Address) {
+type mailerInterface interface {
+	Send(subject, body string, to ...mail.Address) error
+}
+
+func sendEmail(m mailerInterface, to ...mail.Address) {
 
 	m.Send("Subject", "body here", to...)
 }
